@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--
+  루트 og-image.png(1200×630) 원본. 내용을 고친 뒤 아래 명령으로 다시 렌더한다.
+
+  chrome --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=2          --window-size=1200,630 --screenshot=og-2x.png file:///…/assets/og-image.html
+  → og-2x.png(2400×1260)을 1200×630으로 축소해 og-image.png 로 저장
+-->
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../vendor/fonts/pretendard.css" />
+<style>
+  :root{
+    --bg-0:#06080F; --bg-1:#0E1220;
+    --fg:#FFFFFF; --fg-soft:#B8BFD0; --fg-dim:#E2E6F0;
+    --accent:#9B82FF; --accent-2:#2BEAD0; --accent-3:#FF7A95; --accent-4:#FFD46B;
+    --mono:"Cascadia Code","Consolas","D2Coding",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    font-family:"Pretendard","Malgun Gothic",sans-serif;
+    background:var(--bg-0); color:var(--fg);
+    position:relative;
+  }
+  .bg{position:absolute;inset:0;
+    background:
+      radial-gradient(760px 420px at 84% -12%, rgba(155,130,255,.30), transparent 62%),
+      radial-gradient(620px 360px at 6% 112%, rgba(43,234,208,.16), transparent 62%),
+      linear-gradient(160deg,#0E1220 0%,#06080F 60%);
+  }
+  .grid{position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(155,130,255,.07) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(155,130,255,.07) 1px,transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(900px 520px at 50% 0%, rgba(0,0,0,.95), transparent 78%);
+  }
+  .frame{position:absolute;inset:18px;border:1px solid rgba(155,130,255,.22);border-radius:22px}
+
+  .stage{position:absolute;inset:18px;display:grid;grid-template-columns:1fr 372px;gap:34px;
+    padding:44px 52px 40px;align-items:center}
+
+  /* ── 좌측 ── */
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);
+    font-size:16px;letter-spacing:.16em;color:var(--accent-2);
+    border:1px solid rgba(43,234,208,.38);border-radius:999px;padding:7px 18px;
+    background:rgba(43,234,208,.07)}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2)}
+
+  h1{font-size:76px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-top:22px}
+  .tagline{margin-top:12px;font-size:40px;font-weight:800;letter-spacing:-.01em;
+    background:linear-gradient(90deg,var(--accent) 0%,var(--accent-2) 78%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{margin-top:18px;font-size:20px;line-height:1.5;color:var(--fg-soft);max-width:660px}
+
+  .chips{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:19px;font-weight:700;
+    padding:9px 16px;border-radius:12px;background:rgba(255,255,255,.04)}
+  .chip b{font-family:var(--mono);font-size:17px;font-weight:700;opacity:.95}
+  .c1{color:var(--accent-2);border:1px solid rgba(43,234,208,.35);background:rgba(43,234,208,.09)}
+  .c2{color:var(--accent);border:1px solid rgba(155,130,255,.4);background:rgba(155,130,255,.10)}
+  .c3{color:var(--accent-4);border:1px solid rgba(255,212,107,.35);background:rgba(255,212,107,.08)}
+
+  /* ── 우측 터미널 ── */
+  .term{border:1px solid rgba(155,130,255,.28);border-radius:16px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(22,27,48,.96),rgba(10,13,26,.96));
+    box-shadow:0 26px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.02) inset}
+  .term-head{display:flex;align-items:center;gap:8px;padding:11px 14px;
+    border-bottom:1px solid rgba(155,130,255,.18);background:rgba(255,255,255,.03)}
+  .light{width:10px;height:10px;border-radius:50%}
+  .r{background:#FF6058}.y{background:#FFBD2E}.g{background:#28C93F}
+  .term-title{font-family:var(--mono);font-size:12px;color:#7C86A6;margin-left:6px}
+  .live{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent-3)}
+  .term-body{padding:16px 16px 18px;font-family:var(--mono);font-size:14.5px;line-height:1.85}
+  .p{color:var(--accent-2)}
+  .cmd{color:var(--fg-dim)}
+  .out{color:#8892AE}
+  .ok{color:var(--accent-2)}
+  .tick{font-family:"Pretendard",sans-serif;font-weight:700}
+  .hl{color:var(--accent-4)}
+  .caret{display:inline-block;width:9px;height:16px;background:var(--accent-2);
+    vertical-align:-3px;margin-left:3px}
+
+  /* ── 하단 ── */
+  .foot{position:absolute;left:70px;right:70px;bottom:46px;display:flex;align-items:flex-end;justify-content:space-between}
+  .url{font-family:var(--mono);font-size:25px;font-weight:700;color:var(--fg);letter-spacing:-.01em}
+  .url .u{display:block;height:3px;margin-top:9px;border-radius:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .meta{font-size:19px;color:var(--fg-soft)}
+  .meta b{color:var(--fg);font-weight:700}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="grid"></div>
+<div class="frame"></div>
+
+<div class="stage">
+  <div>
+    <span class="eyebrow"><span class="dot"></span>VIBE CODING SEMINAR SERIES</span>
+    <h1>바이브 코딩 세미나</h1>
+    <div class="tagline">코드는 AI가, 방향은 내가</div>
+    <p class="lede">설치 · 프롬프트 · 컨텍스트 · 지식 관리 · 검증 · 보안 · 실습 워크숍</p>
+    <div class="chips">
+      <span class="chip c1">01 시작하기 <b>4강</b></span>
+      <span class="chip c2">02 더 깊이 <b>5강</b></span>
+      <span class="chip c3">03 직접 해보기 <b>4강</b></span>
+    </div>
+  </div>
+
+  <div class="term">
+    <div class="term-head">
+      <span class="light r"></span><span class="light y"></span><span class="light g"></span>
+      <span class="term-title">claude-code — vibe-session</span>
+      <span class="live">LIVE</span>
+    </div>
+    <div class="term-body">
+      <div><span class="p">&gt;</span> <span class="cmd">세미나 슬라이드 만들어줘</span></div>
+      <div class="out">· 컨텍스트 수집 <span class="ok tick">✓</span></div>
+      <div class="out">· 슬라이드 초안 생성 <span class="ok tick">✓</span></div>
+      <div class="out">· 링크·접근성 검증 <span class="ok tick">✓</span></div>
+      <div><span class="hl">reveal.js</span> <span class="out">빌드 없이 바로 실행</span></div>
+      <div><span class="p">&gt;</span><span class="caret"></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="url">geniuskey.github.io/vibe-coding<span class="u"></span></div>
+  <div class="meta">세미나 <b>13강</b> · 빌드 없는 <b>reveal.js</b></div>
+</div>
+</body>
+</html>
